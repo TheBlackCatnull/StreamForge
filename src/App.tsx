@@ -7,7 +7,7 @@ function App() {
   const [count, setCount] = useState(0);
   const name = 'test';
   console.log('name:', name);
-
+  console.log('count:', count);
   return (
     <>
       <div className='w-4'>
