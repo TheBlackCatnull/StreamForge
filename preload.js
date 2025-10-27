@@ -1,7 +1,15 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const fs = require('node:fs')
+const { contextBridge, ipcRenderer } = require('electron')
 
-// 暴露有限的 API 给渲染进程
+// const isDev = require('electron-is-dev')
+
+console.log(fs)
 contextBridge.exposeInMainWorld('electronAPI', {
-  sendMessage: (message) => ipcRenderer.send('message', message),
-  onReply: (callback) => ipcRenderer.on('reply', (event, arg) => callback(arg))
-});
+  isDev: process.env.NODE_ENV === 'development',
+  node: () => process.versions.node,
+  chrome: () => process.versions.chrome,
+  electron: () => process.versions.electron,
+  ipcRenderer,
+  sendMessage: message => ipcRenderer.send('message', message),
+  onReply: callback => ipcRenderer.on('reply', (event, arg) => callback(arg)),
+})

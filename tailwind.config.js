@@ -64,6 +64,9 @@ module.exports = {
         dic3: '1100px',
         dic4: '1440px',
       },
+      boxShadow: {
+        'custom': '2px 2px 5px grey', // 自定义阴影（水平偏移、垂直偏移、模糊、颜色）
+      },
     },
   },
   variants: {
