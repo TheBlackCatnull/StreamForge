@@ -1,26 +1,55 @@
+import { AspectRatio } from 'radix-ui'
 import { useEffect, useState } from 'react'
+import Layout from '@/components/Layout'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import ReturnButton from '@/components/ui/returnbutton'
+import {
+  Button,
+} from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
 import { cn } from '@/utils/ui'
 
 function App() {
   useEffect(() => {
+    // console.log(window.electronAPI)
   }, [])
   return (
     <>
-      <div
-        className={cn(
-          'w-full h-full flex justify-center align-center rounded-lg app-drag shadow-custom overflow-hidden bg-mywhite',
-          process.env.NODE_ENV === 'development' && 'w-[1340px] h-[750px]',
-        )}
-      >
+      <Layout>
+        <div
+          className="p-4 text-center flex justify-center app-drag"
+        >
+          <Carousel className="w-full w-[400px] rounded-md app-no-drag mt-10">
+            <CarouselContent>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <CarouselItem key={index}>
 
-        {/* 红色滑块 + 禁用状态 */}
-        <Alert variant="destructive" className="relative">
-          <AlertTitle>操作成功</AlertTitle>
-          <AlertDescription>您的设置已保存，请刷新页面查看更新。</AlertDescription>
-        </Alert>
-      </div>
+                  <div className="w-[400px] overflow-hidden  shadow-[0_2px_10px] shadow-blackA4">
+                    <AspectRatio.Root ratio={16 / 9}>
+                      <img
+                        className="size-full object-cover"
+                        src="https://images.unsplash.com/photo-1535025183041-0991a977e25b?w=300&dpr=2&q=80"
+                        alt="Landscape photograph by Tobias Tullius"
+                      />
+                    </AspectRatio.Root>
+                  </div>
+
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="app-no-drag" />
+            <CarouselNext className="app-no-drag" />
+          </Carousel>
+
+        </div>
+      </Layout>
+
     </>
   )
 }

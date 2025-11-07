@@ -4,23 +4,18 @@ import {
   BrowserRouter,
   Navigate,
   Route,
+  RouterProvider,
   Routes,
 } from 'react-router-dom'
-import HomePage from './pages/Home'
+import router from './router'
 import './index.css'
 
 function Root() {
   return (
 
     <React.StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <>
-            <Route index element={<HomePage />} />
-            <Route path="/mobile" />
-          </>
-        </Routes>
-      </BrowserRouter>
+
+      <RouterProvider router={router} />
 
     </React.StrictMode>
   )
