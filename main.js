@@ -8,10 +8,10 @@ if (!app.requestSingleInstanceLock()) {
 }
 const preloadPath = path.resolve(__dirname, 'preload.js')//
 // 创建窗口函数
-
+let mainWindow
 function createWindow() {
   // 新建浏览器窗口
-  const mainWindow = new BrowserWindow({ //
+  mainWindow = new BrowserWindow({ //
     width: 1340,
     height: 750,
     frame: false,
@@ -45,11 +45,14 @@ function createWindow() {
       }),
     )
   }
-
+  mainWindow.on('ready-to-show', () => {
+    // console.log(WindowDrag)
+    mainWindow.webContents.send('start-animation')
+  })
   // 窗口关闭事件
   mainWindow.on('closed', () => {
     // 清除窗口实例
-    // mainWindow = null;
+    mainWindow = null
   })
 }
 
@@ -64,19 +67,21 @@ app.whenReady().then(() => {
     }
   })
 })
+app.on('window-all-closed', () => {
+  // 移除 macOS 特殊判断，所有平台关闭窗口后都退出
+  app.quit() // 无论平台，关闭所有窗口后退出主进程
+})
 ipcMain.on('close-app', () => {
-  // eslint-disable-next-line no-undef
   if (mainWindow) {
-    // eslint-disable-next-line no-undef
     mainWindow.close()
   }
 })
 // 所有窗口关闭时退出应用（Windows/Linux）
-app.on('window-all-closed', () => {
-  // if (process.platform !== 'darwin') {
-  //   app.quit();
-  // }
-})
+// app.on('window-all-closed', () => {
+//   // if (process.platform !== 'darwin') {
+//   //   app.quit();
+//   // }
+// })
 ipcMain.on('message', (event, message) => {
   console.log('🎯 收到渲染进程消息:', message)
 
