@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import SidebarContentLayout from '@/components/Layout/SidebarContentLayout'
+import Content from './components/Content'
 
-const LinkSeting: React.FC = () => {
+const Minesweeper: React.FC = () => {
   return (
     <SidebarContentLayout>
-      <div>LinkSetting</div>
+      <main className="py-2 text-center">
+        <Content />
+      </main>
     </SidebarContentLayout>
 
   )
 }
 
-export default LinkSeting
+export default Minesweeper

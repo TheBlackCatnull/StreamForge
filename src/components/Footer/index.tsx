@@ -1,40 +1,42 @@
+import type { ModuleType } from '@/assets/icons'
 import { clsx } from 'clsx'
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { HomeAnimationAtom } from '@/store'
+import { activeModuleAtom, HomeAnimationAtom, moduleMenus } from '@/store'
 import { routeMap } from '../../router'
 
+const modules = [
+  { id: 1, type: 'bullet-chat', name: '弹幕主模块', desc: '支持实时弹幕显示、过滤、关键词高亮', icon: '💬', size: 'col-span-2' },
+  { id: 2, type: 'bullet-chat', name: '开发中...', desc: '敬请期待', icon: '🚧' },
+  { id: 3, type: 'bullet-chat', name: '弹幕帮手网页版', desc: '多平台适配，无需安装客户端，直接在浏览器中使用', icon: '🌐' },
+  { id: 4, type: 'bullet-chat', name: '礼物快乐杯', desc: '礼物特效展示、统计分析', icon: '🎁' },
+  { id: 5, type: 'bullet-chat', name: '弹幕掉落', desc: '触发特定条件时，弹幕以动画形式掉落', icon: '🎆' },
+  { id: 6, type: 'bullet-chat', name: '设置', desc: '全局配置、样式调整、权限管理、数据备份与恢复', icon: '⚙️', size: 'row-span-2' },
+  { id: 7, type: 'casual-games', name: '休闲游戏', desc: '各种好玩益智的小游戏', icon: '🎮' },
+  { id: 8, type: 'bullet-chat', name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
+  { id: 9, type: 'bullet-chat', name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
+  { id: 10, type: 'bullet-chat', name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
+  { id: 11, type: 'bullet-chat', name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
+  { id: 12, type: 'bullet-chat', name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
+
+  // 更多卡片...
+]
 const { ipcRenderer } = window.electronAPI
 const Footer: React.FC = () => {
   const [anime, setAnime] = useAtom(HomeAnimationAtom)
+  const setActiveModule = useSetAtom(activeModuleAtom)
   const navigate = useNavigate()
-  const modules = [
-    { id: 1, name: '弹幕主模块', desc: '支持实时弹幕显示、过滤、关键词高亮', icon: '💬', size: 'col-span-2' },
-    { id: 2, name: '开发中...', desc: '敬请期待', icon: '🚧' },
-    { id: 3, name: '弹幕帮手网页版', desc: '多平台适配，无需安装客户端，直接在浏览器中使用', icon: '🌐' },
-    { id: 4, name: '礼物快乐杯', desc: '礼物特效展示、统计分析', icon: '🎁' },
-    { id: 5, name: '弹幕掉落', desc: '触发特定条件时，弹幕以动画形式掉落', icon: '🎆' },
-    { id: 6, name: '设置', desc: '全局配置、样式调整、权限管理、数据备份与恢复', icon: '⚙️', size: 'row-span-2' },
-    { id: 7, name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
-    { id: 8, name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
-    { id: 9, name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
-    { id: 10, name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
-    { id: 11, name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
-    { id: 12, name: '开发中...', desc: '功能规划中，预计下个版本上线', icon: '🚧' },
-
-    // 更多卡片...
-  ]
-
   const orderMap = [0, 1, 2, 3, 4, 5, 11, 10, 9, 8, 7, 6]
   const [animationState, setAnimationState] = useState<'init' | 'active' | 'end'>('init')
   const [cardStartEnd, setcardStartEnd] = useState<boolean>(true)
-  const handleCardClick = useCallback((cardId: string) => {
+  const handleCardClick = useCallback((cardId: ModuleType) => {
     const targetRoute = routeMap[cardId]
     if (targetRoute) {
       navigate(targetRoute)
+      setActiveModule(cardId)
     }
-  }, [])
+  }, [setActiveModule, navigate])
 
   useEffect(() => {
     if (!anime) {
@@ -80,7 +82,7 @@ const Footer: React.FC = () => {
                       setcardStartEnd(false)
                     }
                   : undefined}
-                onClick={() => handleCardClick(item.name)}
+                onClick={() => handleCardClick(item.type as ModuleType)}
               >
                 {/* 红色数字标记 */}
                 <span className="absolute -top-2 -left-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">

@@ -19,6 +19,10 @@ const buttonVariants = cva(
           'bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
         ghost: 'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
         link: 'text-slate-900 underline-offset-4 hover:underline dark:text-slate-50',
+        success: 'bg-green-500 text-white hover:bg-green-600 ' // 绿色背景、白色文字、hover加深
+          + 'focus:ring-2 focus:ring-green-500 focus:ring-offset-2 ' // 聚焦时绿色边框（覆盖默认）
+          + 'focus-visible:ring-green-500 ' // 键盘聚焦时也用绿色边框
+          + 'dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 dark:focus-visible:ring-green-400', // 深色模式适配
       },
       size: {
         default: 'h-10 px-4 py-2',

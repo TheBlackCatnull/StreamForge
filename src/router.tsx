@@ -5,14 +5,16 @@ import DisplaySetting from '@/pages/BulletChatMain/DisplaySetting'
 import HistorySetting from '@/pages/BulletChatMain/HistorySetting'
 import LinkSetting from '@/pages/BulletChatMain/LinkSetting'
 import RenderSetting from '@/pages/BulletChatMain/RenderSetting'
-import BulletChatMain from './pages/BulletChatMain' // 弹幕主模块页面
-import HomePage from './pages/Home' // 包含卡片网格的首页
-
 // 定义路由映射关系（卡片标识 → 对应路由）
+import Minesweeper from '@/pages/CasualGames/Minesweeper'
+import BulletChatMain from './pages/BulletChatMain' // 弹幕主模块页面
+import CasualGames from './pages/CasualGames'
+import HomePage from './pages/Home'
+// 包含卡片网格的首页
 export const routeMap: Record<string, string> = {
-  弹幕主模块: '/BulletChatMain',
-  首页: '/',
-
+  'bullet-chat': '/BulletChatMain',
+  '首页': '/',
+  'casual-games': '/CasualGames',
 }
 
 // 创建路由配置
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
       { path: 'display', element: <DisplaySetting /> },
       { path: 'render', element: <RenderSetting /> },
       { path: 'history', element: <HistorySetting /> },
+    ],
+  },
+  {
+    path: '/CasualGames',
+    element: <CasualGames />,
+    children: [
+      { path: 'mine', element: <Minesweeper /> }, // 链接设置子页面
+
     ],
   },
 

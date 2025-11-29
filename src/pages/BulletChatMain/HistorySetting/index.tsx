@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import SidebarContentLayout from '@/components/Layout/SidebarContentLayout'
 
-const HistorySeting: React.FC = () => {
+const HistorySetting: React.FC = () => {
   return (
-    <div>
-      HistorySeting
-    </div>
+    <SidebarContentLayout>
+      HistorySetting
+    </SidebarContentLayout>
   )
 }
 
-export default HistorySeting
+export default HistorySetting

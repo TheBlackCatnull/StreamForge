@@ -1,11 +1,7 @@
-import React, { lazy, StrictMode, Suspense, useState } from 'react'
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import {
-  BrowserRouter,
-  Navigate,
-  Route,
   RouterProvider,
-  Routes,
 } from 'react-router-dom'
 import router from './router'
 import './index.css'
@@ -14,9 +10,7 @@ function Root() {
   return (
 
     <React.StrictMode>
-
       <RouterProvider router={router} />
-
     </React.StrictMode>
   )
 }

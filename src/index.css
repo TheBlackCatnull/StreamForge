@@ -81,14 +81,14 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+/* button:hover {
   border-color: #646cff;
-}
-button:focus,
+} */
+/* button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+这个是设置轮廓的样式,默认是浏览器的轮廓颜色出现与shadcn发生冲突时可以关闭 */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

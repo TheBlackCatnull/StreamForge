@@ -20,5 +20,8 @@ export default antfu({
   ],
   rules: {
     'node/prefer-global/process': 'off', // 禁用此规则
+    // "react-hooks/exhaustive-deps": "error", // "error" 级别会报错，"warn" 仅警告，按需选择
+    // // 可选：React 官方还推荐启用这两个规则（检查 Hook 调用规范）
+    // "react-hooks/rules-of-hooks": "error" // 禁止在条件/循环中调用 Hook（必须在顶层）
   },
 })

@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import SidebarContentLayout from '@/components/Layout/SidebarContentLayout'
 
-const DisplaySeting: React.FC = () => {
+const DisplaySetting: React.FC = () => {
   return (
-    <div>
-      DisplaySeting
-    </div>
+    <SidebarContentLayout>
+      DisplaySetting
+    </SidebarContentLayout>
   )
 }
 
-export default DisplaySeting
+export default DisplaySetting

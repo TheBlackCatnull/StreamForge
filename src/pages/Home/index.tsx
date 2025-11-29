@@ -1,11 +1,7 @@
 import { AspectRatio } from 'radix-ui'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Layout from '@/components/Layout'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import {
-  Button,
-} from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+
 import {
   Carousel,
   CarouselContent,
@@ -13,7 +9,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import { cn } from '@/utils/ui'
 
 function App() {
   useEffect(() => {
@@ -25,7 +20,7 @@ function App() {
         <div
           className="p-4 text-center flex justify-center app-drag"
         >
-          <Carousel className="w-full w-[400px] rounded-md app-no-drag mt-10">
+          <Carousel className="w-[400px] rounded-md app-no-drag mt-10">
             <CarouselContent>
               {Array.from({ length: 5 }).map((_, index) => (
                 <CarouselItem key={index}>
